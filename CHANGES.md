@@ -1,6 +1,29 @@
 CHANGES
 =======
 
+- `CWTClaims` class
+  * Added `STATUS_LIST`.
+  * Added `TTL`.
+  * Added `STATUS`.
+
+- `CWTClaimsSet` class
+  * Added the `getTtl()` method.
+
+- `CWTClaimsSetBuilder` class
+  * Added the `ttl(long)` method.
+
+- `MobileSecurityObject` class
+  * Added constructors that accept a `status` parameter in
+    addition to the existing ones.
+
+- New types
+  * `Status` class
+  * `StatusList` class
+  * `StatusListBuilder` class
+  * `StatusListInfo` class
+  * `StatusTypeValue` enum
+  * `StatusTypeValuesBuilder` class
+
 1.20 (2025-10-07)
 -----------------
 

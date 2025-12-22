@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Authlete, Inc.
+ * Copyright (C) 2023-2025 Authlete, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,16 +95,37 @@ package com.authlete.cwt.constants;
  *   <tr>
  *     <td>{@link #NONCE Nonce}</td>
  *     <td>10</td>
- *     <td>byte string</td>
- *     <td>Nonce (TEMPORARY - registered 2022-03-23, extension registered 2023-02-13, expires 2024-03-23)</td>
+ *     <td>bstr or array</td>
+ *     <td>Nonce</td>
+ *   </tr>
+ *
+ *   <tr>
+ *     <td>{@link #STATUS_LIST status_list}</td>
+ *     <td>65533</td>
+ *     <td>map</td>
+ *     <td>A CBOR structure containing up-to-date status information on multiple tokens using the Token Status List mechanism.</td>
+ *   </tr>
+ *
+ *   <tr>
+ *     <td>{@link #TTL ttl}</td>
+ *     <td>65534</td>
+ *     <td>unsigned integer</td>
+ *     <td>Time to Live</td>
+ *   </tr>
+ *
+ *   <tr>
+ *     <td>{@link #STATUS status}</td>
+ *     <td>65535</td>
+ *     <td>map</td>
+ *     <td>A CBOR structure containing a reference to a status mechanism from the CWT Status Mechanisms Registry.</td>
  *   </tr>
  * </table>
  * </blockquote>
  *
  * @since 1.4
  *
- * @see <a href="https://www.iana.org/assignments/cwt/cwt.xhtml"
- *      >IANA: CBOR Web Token (CWT) Claims</a>
+ * @see <a href="https://www.iana.org/assignments/cwt/cwt.xhtml">
+ *      IANA: CBOR Web Token (CWT) Claims</a>
  */
 public class CWTClaims
 {
@@ -155,12 +176,40 @@ public class CWTClaims
 
     /**
      * Nonce (10); Nonce
-     *
-     * <p>
-     * (TEMPORARY - registered 2022-03-23, extension registered 2023-02-13, expires 2024-03-23)
-     * </p>
      */
     public static final int NONCE = 10;
+
+    /**
+     * status_list (65533); A CBOR structure containing up-to-date status
+     * information on multiple tokens using the Token Status List mechanism.
+     *
+     * @see <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">
+     *      Token Status List (TSL)</a>
+     *
+     * @since 1.21
+     */
+    public static final int STATUS_LIST = 65533;
+
+    /**
+     * ttl (65534); Time to Live
+     *
+     * @see <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">
+     *      Token Status List (TSL)</a>
+     *
+     * @since 1.21
+     */
+    public static final int TTL = 65534;
+
+    /**
+     * status (65535); A CBOR structure containing a reference to a status
+     * mechanism from the CWT Status Mechanisms Registry.
+     *
+     * @see <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">
+     *      Token Status List (TSL)</a>
+     *
+     * @since 1.21
+     */
+    public static final int STATUS = 65535;
 
     private CWTClaims()
     {

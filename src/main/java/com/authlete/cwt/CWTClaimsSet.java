@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Authlete, Inc.
+ * Copyright (C) 2023-2025 Authlete, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,6 +57,7 @@ public class CWTClaimsSet extends CBORPairList
     private Date iat;
     private byte[] cti;
     private byte[] nonce;
+    private Long ttl;
 
 
     /**
@@ -140,6 +141,9 @@ public class CWTClaimsSet extends CBORPairList
             case CWTClaims.NONCE:
                 nonce = (byte[])value;
                 break;
+
+            case CWTClaims.TTL:
+                ttl = (Long)value;
 
             default:
                 break;
@@ -355,6 +359,23 @@ public class CWTClaimsSet extends CBORPairList
         CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
 
         return decoder.decode(byteBuffer).toString();
+    }
+
+
+    /**
+     * Get the value of the "ttl (65534)" claim.
+     *
+     * @return
+     *         The value of the "ttl (65534)" claim.
+     *
+     * @see <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">
+     *      Token Status List (TSL)</a>
+     *
+     * @since 1.21
+     */
+    public Long getTtl()
+    {
+        return ttl;
     }
 
 
