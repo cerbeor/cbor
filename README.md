@@ -10,6 +10,7 @@ The current implementation supports the features below. More features will
 be added as the need arises.
 
 - [x] CBOR
+  - [x] Token Status List
 - [x] COSE
   - [x] Basic Components
   - [x] Signature
@@ -24,6 +25,7 @@ be added as the need arises.
   - [x] Tag Processor
   - [x] CWT Claims Set
   - [x] CWT Key Proof
+  - [ ] Status List Token
 - [x] mdoc
 
 ## License
@@ -48,7 +50,7 @@ Check the [CHANGES.md](CHANGES.md) file to know the latest version.
 
 ## JavaDoc
 
-  <code>https://authlete.github.io/cbor/index.html?overview-summary.html</code>
+  <code>https://authlete.github.io/cbor/index.html</code>
 
 ## Standard Specifications
 
@@ -72,6 +74,7 @@ The list does not necessarily mean that this library supports all of them.
 - [RFC 9090][RFC_9090] Concise Binary Object Representation (CBOR) Tags for Object Identifiers
 - [RFC 9338][RFC_9338] CBOR Object Signing and Encryption (COSE): Countersignatures
 - [RFC 9360][RFC_9360] CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates
+- WG DRAFT: [Token Status List (TSL)][IETF_WG_DRAFT_TSL]
 
 ### IANA Assignments
 
@@ -1673,6 +1676,47 @@ data will be embedded accordingly.
 }
 ```
 
+### Token Status List
+
+The [Token Status List (TSL)][IETF_WG_DRAFT_TSL]
+specification introduces the following CBOR structures:
+
+- `Status`
+- `StatusList`
+- `StatusListInfo`
+
+The `com.authlete.cbor.tsl` package contains classes with the same names
+that represent these CBOR structures.
+
+To construct a `StatusList` instance, the utility class `StatusListBuilder`
+is provided. The following code shows how to use `StatusListBuilder` to
+construct a `StatusList` instance that contains the same status values as
+those listed in Appendix C.1 of the Token Status List specification.
+
+```java
+int bits = 1;
+
+// Create a builder
+StatusListBuilder builder =
+        new StatusListBuilder(bits).capacity(1048576);
+
+// Set status values
+builder.valueAt(StatusTypeValue.INVALID,       0);
+builder.valueAt(StatusTypeValue.INVALID,    1993);
+builder.valueAt(StatusTypeValue.INVALID,   25460);
+builder.valueAt(StatusTypeValue.INVALID,  159495);
+builder.valueAt(StatusTypeValue.INVALID,  495669);
+builder.valueAt(StatusTypeValue.INVALID,  554353);
+builder.valueAt(StatusTypeValue.INVALID,  645645);
+builder.valueAt(StatusTypeValue.INVALID,  723232);
+builder.valueAt(StatusTypeValue.INVALID,  854545);
+builder.valueAt(StatusTypeValue.INVALID,  934534);
+builder.valueAt(StatusTypeValue.INVALID, 1000345);
+
+// Construct a status list
+StatusList statusList = builder.build();
+```
+
 ## Contact
 
 Authlete Contact Form: https://www.authlete.com/contact/
@@ -1700,6 +1744,7 @@ Authlete Contact Form: https://www.authlete.com/contact/
 [RFC_9090]: https://www.rfc-editor.org/rfc/rfc9090.html
 [RFC_9338]: https://www.rfc-editor.org/rfc/rfc9338.html
 [RFC_9360]: https://www.rfc-editor.org/rfc/rfc9360.html
+[IETF_WG_DRAFT_TSL]: https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/
 
 [IANA_cbor_simple_values]: https://www.iana.org/assignments/cbor-simple-values/cbor-simple-values.xhtml
 [IANA_cbor_tags]: https://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml

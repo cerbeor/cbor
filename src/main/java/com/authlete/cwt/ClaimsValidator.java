@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Authlete, Inc.
+ * Copyright (C) 2023-2025 Authlete, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -147,6 +147,9 @@ class ClaimsValidator
             case CWTClaims.NONCE:
                 return validateByteString(value, "nonce");
 
+            case CWTClaims.TTL:
+                return validateLong(value, "ttl");
+
             default:
                 return parseValue(value);
         }
@@ -246,5 +249,36 @@ class ClaimsValidator
 
         throw new IllegalArgumentException(String.format(
                 "The value of the '%s' claim must be a byte string.", claimName));
+    }
+
+
+    private static Long validateLong(CBORItem value, String claimName)
+    {
+        // int or long
+        if (value instanceof CBORInteger || value instanceof CBORLong)
+        {
+            // Convert int or long to Long.
+            return ((Number)((CBORValue<?>)value).getValue()).longValue();
+        }
+        // BigInteger
+        else if (value instanceof CBORBigInteger)
+        {
+            BigInteger bi = ((CBORBigInteger)value).getValue();
+
+            if (bi.compareTo(CBORConstants.BIG_INTEGER_LONG_MIN) < 0 ||
+                CBORConstants.BIG_INTEGER_LONG_MAX.compareTo(bi) < 0)
+            {
+                throw new IllegalArgumentException(String.format(
+                        "The value of the '%s' claim is out of the valid range.", claimName));
+            }
+
+            // Convert BigInteger to Long.
+            return bi.longValue();
+        }
+        else
+        {
+            throw new IllegalArgumentException(String.format(
+                    "The value of the '%s' claim must be an integer.", claimName));
+        }
     }
 }

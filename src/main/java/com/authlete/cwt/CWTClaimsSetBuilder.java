@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Authlete, Inc.
+ * Copyright (C) 2023-2025 Authlete, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -271,6 +271,29 @@ public class CWTClaimsSetBuilder
     public CWTClaimsSetBuilder nonce(byte[] nonce)
     {
         return put(CWTClaims.NONCE, nonce);
+    }
+
+
+    /**
+     * Set the "ttl (65534)" claim.
+     *
+     * @param ttl
+     *         The value of the {@code ttl} (Time to Live) claim.
+     *         The maximum amount of time, in seconds, that the Status List
+     *         Token can be cached by a consumer before a fresh copy SHOULD
+     *         be retrieved.
+     *
+     * @return
+     *         {@code this} object.
+     *
+     * @see <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">
+     *      Token Status List (TSL)</a>
+     *
+     * @since 1.21
+     */
+    public CWTClaimsSetBuilder ttl(long ttl)
+    {
+        return put(CWTClaims.TTL, ttl);
     }
 
 
