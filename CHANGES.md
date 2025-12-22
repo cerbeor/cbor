@@ -1,6 +1,9 @@
 CHANGES
 =======
 
+1.21 (2025-12-22)
+-----------------
+
 - `CWTClaims` class
   * Added `STATUS_LIST`.
   * Added `TTL`.
