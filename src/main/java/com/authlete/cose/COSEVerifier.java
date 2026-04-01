@@ -380,6 +380,7 @@ public class COSEVerifier
         {
             // ECDSA
             case COSEAlgorithms.ES256:
+            case COSEAlgorithms.ESP256:
             case COSEAlgorithms.ES384:
             case COSEAlgorithms.ES512:
                 return ECDSA.verify(key, alg, data, signature);

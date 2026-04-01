@@ -190,6 +190,7 @@ public class COSESigner implements SigStructureSigner
         {
             // ECDSA
             case COSEAlgorithms.ES256:
+            case COSEAlgorithms.ESP256:
             case COSEAlgorithms.ES384:
             case COSEAlgorithms.ES512:
                 return ECDSA.sign(key, alg, data);

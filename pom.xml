@@ -4,7 +4,7 @@
 
     <groupId>com.authlete</groupId>
     <artifactId>cbor</artifactId>
-    <version>1.22-SNAPSHOT</version>
+    <version>1.22-SNAPSHOT-ESP256</version>
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>

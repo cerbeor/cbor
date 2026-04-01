@@ -98,6 +98,12 @@ import java.util.Map;
  *     <td>ECDSA w/ SHA-256</td>
  *   </tr>
  *
+ *   <tr>
+ *     <td>{@link #ESP256}</td>
+ *     <td>-9</td>
+ *     <td>ECDSA</td>
+ *   </tr>
+ *
  * </table>
  * </blockquote>
  *
@@ -171,16 +177,21 @@ public final class COSEAlgorithms
      */
     public static final int ES256 = -7;
 
+    /**
+     * ESP256 (-9);
+     */
+    public static final int ESP256 = -9;
+
 
     private static final int[] values = {
             RS512, RS384, RS256, ES256K,
-            PS512, PS384, PS256, ES512, ES384, EdDSA, ES256,
+            PS512, PS384, PS256, ES512, ES384, EdDSA, ES256, ESP256
     };
 
 
     private static final String[] names = {
             "RS512", "RS384", "RS256", "ES256K",
-            "PS512", "PS384", "PS256", "ES512", "ES384", "EdDSA", "ES256",
+            "PS512", "PS384", "PS256", "ES512", "ES384", "EdDSA", "ES256", "ESP256"
     };
 
 

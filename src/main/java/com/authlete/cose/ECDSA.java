@@ -345,7 +345,7 @@ class ECDSA
      *
      * @param algorithm
      *         The identifier of a signature algorithm. Must be one of
-     *         {@link COSEAlgorithms#ES256 ES256}, {@link COSEAlgorithms#ES384 ES384}
+     *         {@link COSEAlgorithms#ES256 ES256}, {@link COSEAlgorithms#ESP256 ESP256}, {@link COSEAlgorithms#ES384 ES384}
      *         or {@link COSEAlgorithms#ES512 ES512}.
      *
      * @param data
@@ -384,7 +384,7 @@ class ECDSA
      *
      * @param algorithm
      *         The identifier of a signature algorithm. Must be one of
-     *         {@link COSEAlgorithms#ES256 ES256}, {@link COSEAlgorithms#ES384 ES384}
+     *         {@link COSEAlgorithms#ES256 ES256}, {@link COSEAlgorithms#ESP256 ESP256}, {@link COSEAlgorithms#ES384 ES384}
      *         or {@link COSEAlgorithms#ES512 ES512}.
      *
      * @param data
@@ -482,8 +482,8 @@ class ECDSA
         switch (algorithm)
         {
             case COSEAlgorithms.ES256:
+            case COSEAlgorithms.ESP256:
                 return beforeJre9 ? "SHA256withPLAIN-ECDSA" : "SHA256withECDSAinP1363Format";
-
             case COSEAlgorithms.ES384:
                 return beforeJre9 ? "SHA384withPLAIN-ECDSA" : "SHA384withECDSAinP1363Format";
 
