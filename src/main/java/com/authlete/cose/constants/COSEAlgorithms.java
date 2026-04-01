@@ -178,7 +178,7 @@ public final class COSEAlgorithms
     public static final int ES256 = -7;
 
     /**
-     * ESP256 (-9);
+     * ESP256 (-9); ECDSA using P-256 curve and SHA-256
      */
     public static final int ESP256 = -9;
 
