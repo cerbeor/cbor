@@ -41,7 +41,7 @@ public class COSEKeyTest
         Map<String, Object> map = new LinkedHashMap<>();
 
         map.put("kty",     "EC");
-        map.put("alg",     "ES256");
+        map.put("alg",     "ESP256");
         map.put("kid",     "614zVgCx2TB6G3UFaSDa8OXtsOErqey5NuaLbeEIfnc");
         map.put("key_ops", Arrays.asList("sign"));
         map.put("crv",     "P-256");
@@ -74,7 +74,7 @@ public class COSEKeyTest
         assertEquals(Integer.valueOf(COSEKeyTypes.EC2), ec2Key.getKty());
 
         // alg
-        assertEquals(Integer.valueOf(COSEAlgorithms.ES256), ec2Key.getAlg());
+        assertEquals(Integer.valueOf(COSEAlgorithms.ESP256), ec2Key.getAlg());
 
         // kid
         assertEquals(map.get("kid"), new String(ec2Key.getKid(), StandardCharsets.UTF_8));

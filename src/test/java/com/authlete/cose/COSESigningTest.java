@@ -303,7 +303,7 @@ public class COSESigningTest
     {
         byte[] data  = "test".getBytes(StandardCharsets.UTF_8);
         byte[] data2 = "test2".getBytes(StandardCharsets.UTF_8);
-        int    alg   = COSEAlgorithms.ES256;
+        int    alg   = COSEAlgorithms.ESP256;
 
         // Sign
         byte[] signature = COSESigner.sign(EC_PRIVATE_KEY_11, alg, data);
@@ -322,7 +322,7 @@ public class COSESigningTest
     public void test_signing_02() throws COSEException
     {
         // Signature algorithm
-        int algorithm = COSEAlgorithms.ES256;
+        int algorithm = COSEAlgorithms.ESP256;
 
         // Protected header
         COSEProtectedHeader protectedHeader =
@@ -364,6 +364,26 @@ public class COSESigningTest
 
         assertTrue(valid, "Signature verification failed.");
     }
+
+    @Test
+    public void test_signing_03() throws COSEException
+    {
+        byte[] data  = "test".getBytes(StandardCharsets.UTF_8);
+        byte[] data2 = "test2".getBytes(StandardCharsets.UTF_8);
+        int    alg   = COSEAlgorithms.ESP256;
+
+        // Sign
+        byte[] signature = COSESigner.sign(EC_PRIVATE_KEY_11, alg, data);
+
+        // Verify; the result should be valid.
+        boolean valid = COSEVerifier.verify(EC_PUBLIC_KEY_11, alg, data, signature);
+        assertTrue(valid, "Signature verification failed.");
+
+        // Verify; the result should be invalid.
+        valid = COSEVerifier.verify(EC_PUBLIC_KEY_11, alg, data2, signature);
+        assertFalse(valid, "Signature verification failed.");
+    }
+
 
     @Test
     public void test_signing_eddsa_01() throws COSEException, NoSuchAlgorithmException
